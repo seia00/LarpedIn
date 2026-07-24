@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { garamond, inter } from "./fonts";
 import CustomCursor from "@/components/CustomCursor";
 import PageTransition from "@/components/PageTransition";
+import MobileGate from "@/components/MobileGate";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -21,6 +22,7 @@ export default function RootLayout({
         {children}
         <PageTransition />
         <CustomCursor />
+        <MobileGate />
       </body>
     </html>
   );
