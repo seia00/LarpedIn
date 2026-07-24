@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { garamond, inter } from "./fonts";
 import CustomCursor from "@/components/CustomCursor";
+import PageTransition from "@/components/PageTransition";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,6 +19,7 @@ export default function RootLayout({
     <html lang="en" className={`${garamond.variable} ${inter.variable}`}>
       <body className="font-sans antialiased">
         {children}
+        <PageTransition />
         <CustomCursor />
       </body>
     </html>

@@ -19,6 +19,51 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ---- Page zoom transitions ------------------------------------------- */
+/* template.tsx wraps every route in .page-enter, which remounts on each
+   navigation, so this enter animation replays on every page change. The
+   leaving page is tagged [data-leaving] by the click interceptor for a quick
+   zoom-through. Both scales stay >= 1 so nothing reveals the page edges. */
+
+@keyframes page-zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(1.045);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes page-zoom-through {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+}
+
+.page-enter {
+  transform-origin: 50% 45%;
+  animation: page-zoom-in 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+}
+
+.page-enter[data-leaving] {
+  animation: page-zoom-through 220ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter,
+  .page-enter[data-leaving] {
+    animation: none;
+  }
+}
+
 @layer components {
   /* Thin dividers instead of heavy borders — the design-system default. */
   .hairline {
