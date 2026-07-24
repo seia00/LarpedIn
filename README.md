@@ -1,4 +1,4 @@
-# LarpedIn
+# LarpLink
 
 Turn a person's career background into a polished, narrative-driven profile they can copy-paste live. Two tiers:
 
@@ -47,7 +47,8 @@ The UI (landing, `/choose`, forms, preview with a sample profile) works without 
 
 ```
 app/            routes, layout, fonts, globals
-components/     ProfileForm, ImageDropzone, PreviewCard, CopySection
+components/     ProfileForm, ImageDropzone, PreviewCard, CopySection,
+                SuedeBackground (interactive velvet hero), CustomCursor
 lib/            types, prompt builder + JSON parsing, sessionStorage store, sample
 ```
 

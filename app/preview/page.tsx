@@ -56,7 +56,7 @@ export default function PreviewPage() {
         backgroundColor: "#ffffff",
       });
       const link = document.createElement("a");
-      link.download = "larpedin-profile.png";
+      link.download = "larplink-profile.png";
       link.href = dataUrl;
       link.click();
     } catch (err) {
@@ -68,25 +68,28 @@ export default function PreviewPage() {
 
   if (!profile) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-linen">
-        <p className="font-serif text-lg italic text-ink/50">Loading…</p>
+      <main className="flex min-h-screen items-center justify-center bg-parchment">
+        <p className="font-serif text-lg italic text-ink/50">Composing…</p>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-linen px-6 py-14">
+    <main className="min-h-screen bg-parchment px-6 py-14">
       <div className="mx-auto max-w-2xl">
         <header className="mb-10 text-center">
           <Link
             href="/"
             className="font-serif text-xl font-semibold text-crimson"
           >
-            LarpedIn
+            LarpLink
           </Link>
           <h1 className="mt-6 font-serif text-4xl font-semibold text-ink">
             Your elevated profile
           </h1>
+          <div className="rule-gold mx-auto mt-5 w-full max-w-[200px]">
+            <span className="text-base leading-none">❖</span>
+          </div>
           <p className="mt-3 text-[15px] text-ink/65">
             {tier === "max" ? "Larp-Max" : tier === "lite" ? "Larp-Lite" : ""}
             {isSample
@@ -133,7 +136,7 @@ export default function PreviewPage() {
         {/* Suggestions */}
         {(profile.suggested_featured.length > 0 ||
           (profile.suggested_recommendations?.length ?? 0) > 0) && (
-          <section className="mt-10 rounded-xl border border-ink/10 bg-white p-6">
+          <section className="mt-10 rounded-[4px] bg-ivory p-6 ring-1 ring-ink/10">
             {profile.suggested_featured.length > 0 && (
               <div>
                 <h3 className="section-eyebrow">Featured ideas</h3>

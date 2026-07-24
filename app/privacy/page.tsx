@@ -2,17 +2,17 @@ import Link from "next/link";
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen bg-white px-6 py-16">
+    <main className="min-h-screen bg-parchment px-6 py-16">
       <div className="mx-auto max-w-2xl">
         <Link href="/" className="font-serif text-xl font-semibold text-crimson">
-          LarpedIn
+          LarpLink
         </Link>
         <h1 className="mt-8 font-serif text-4xl font-semibold text-ink">
           Privacy
         </h1>
         <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-ink/75">
           <p>
-            LarpedIn sends the details you enter (and, for Larp-Max, the
+            LarpLink sends the details you enter (and, for Larp-Max, the
             screenshots you upload) to an AI model to generate your profile. We
             don&apos;t store your inputs or the generated result on our servers
             for v1 — the output lives only in your browser session.
@@ -26,10 +26,10 @@ export default function PrivacyPage() {
           <p>
             Questions? Email{" "}
             <a
-              href="mailto:hello@larpedin.app"
+              href="mailto:hello@larplink.app"
               className="text-crimson underline-offset-2 hover:underline"
             >
-              hello@larpedin.app
+              hello@larplink.app
             </a>
             .
           </p>

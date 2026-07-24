@@ -25,9 +25,9 @@ export default function CopySection({
   if (!text.trim()) return null;
 
   return (
-    <div className="rounded-xl border border-ink/10 bg-white">
-      <div className="flex items-center justify-between border-b border-ink/8 px-4 py-2.5">
-        <span className="text-xs font-semibold uppercase tracking-[0.12em] text-ink/55">
+    <div className="rounded-[4px] bg-ivory ring-1 ring-ink/10">
+      <div className="flex items-center justify-between border-b border-gold/30 px-4 py-2.5">
+        <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gold-dark">
           {label}
         </span>
         <button

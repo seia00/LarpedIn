@@ -8,18 +8,28 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Design system — "old money meets startup"
+        // Design system — old money: deep oxblood, parchment, antique gold.
+        // Token kept as `crimson` for continuity; the hue is now a dark oxblood.
         crimson: {
-          DEFAULT: "#9B1B30",
-          dark: "#7E1626",
-          light: "#B84152",
+          DEFAULT: "#5A121E", // oxblood
+          dark: "#3D0C15",
+          light: "#7A1E2B",
         },
-        ink: "#1A1A1A",
-        paper: "#FFFFFF",
-        // Light warm gray for card backgrounds / section dividers
-        linen: "#F5F3F0",
-        // Muted cream for subheads on crimson
-        cream: "#F3E9E4",
+        // Antique / brushed brass — used only as hairlines and small accents.
+        gold: {
+          DEFAULT: "#A98A50",
+          dark: "#836A3B",
+          light: "#C6AA73",
+        },
+        ink: "#221E19", // warm near-black
+        // Page background — aged parchment, never stark white.
+        parchment: "#F2EBDB",
+        // Card / input surface — a lighter ivory that still reads as paper.
+        ivory: "#FBF7EE",
+        // Insets and dividers — deeper parchment.
+        linen: "#E9E0CD",
+        // Muted cream for text on oxblood.
+        cream: "#EBDDC8",
       },
       fontFamily: {
         // Display / wordmark / headings + preview name/headline
@@ -29,7 +39,7 @@ const config: Config = {
       },
       boxShadow: {
         // The only shadow we allow — a very subtle lift on the preview card
-        card: "0 1px 2px rgba(26, 26, 26, 0.04), 0 12px 32px rgba(26, 26, 26, 0.08)",
+        card: "0 1px 2px rgba(34, 30, 25, 0.05), 0 18px 44px rgba(61, 12, 21, 0.10)",
       },
       maxWidth: {
         card: "620px",

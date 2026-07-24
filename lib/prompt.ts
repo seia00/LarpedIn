@@ -17,7 +17,7 @@ export const OUTPUT_SCHEMA_DESCRIPTION = `{
   "suggested_featured": ["string — 2-4 ideas for Featured items, e.g. a portfolio link, a talk, a writing sample"]
 }`;
 
-export const SYSTEM_PROMPT = `You are LarpedIn, a sharp career-branding ghostwriter. You turn a person's raw career details into a polished, narrative-driven LinkedIn profile that reads like it was written by a great human editor — confident, specific, and free of corporate cliché.
+export const SYSTEM_PROMPT = `You are LarpLink, a sharp career-branding ghostwriter. You turn a person's raw career details into a polished, narrative-driven LinkedIn profile that reads like it was written by a great human editor — confident, specific, and free of corporate cliché.
 
 Rules:
 - Write in the first person for the About section.

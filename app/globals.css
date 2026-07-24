@@ -13,48 +13,149 @@ body {
 }
 
 body {
-  background-color: #ffffff;
-  color: #1a1a1a;
+  background-color: #f2ebdb; /* parchment */
+  color: #221e19; /* warm near-black */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Thin dividers instead of heavy borders — the design-system default. */
 @layer components {
+  /* Thin dividers instead of heavy borders — the design-system default. */
   .hairline {
     @apply border-0 border-t border-ink/10;
   }
 
-  /* Form field chrome (Inter). */
+  /* Centered ornamental rule — gold hairlines flanking a small diamond.
+     The old-money "section break". */
+  .rule-gold {
+    @apply flex items-center justify-center gap-3 text-gold;
+  }
+  .rule-gold::before,
+  .rule-gold::after {
+    content: "";
+    @apply h-px w-16 bg-gold/50;
+  }
+
+  /* Wide-tracked, engraved eyebrow in antique gold. */
+  .section-eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.28em] text-gold-dark;
+  }
+
+  /* Form field chrome (Inter) — ivory paper, squared, oxblood focus. */
   .field-label {
-    @apply block text-sm font-medium text-ink/70 mb-1.5;
+    @apply block text-[13px] font-medium uppercase tracking-[0.08em] text-ink/60 mb-1.5;
   }
 
   .field-input {
-    @apply w-full rounded-md border border-ink/15 bg-white px-3.5 py-2.5 text-[15px] text-ink
+    @apply w-full rounded-[3px] border border-ink/20 bg-ivory px-3.5 py-2.5 text-[15px] text-ink
       placeholder:text-ink/35 outline-none transition
-      focus:border-crimson focus:ring-2 focus:ring-crimson/15;
+      focus:border-crimson focus:ring-2 focus:ring-gold/25;
   }
 
   .field-textarea {
     @apply field-input min-h-[96px] resize-y leading-relaxed;
   }
 
-  /* Primary CTA — crimson fill, generous padding, rounded. */
+  /* Primary CTA — oxblood plaque, squared, wide-tracked, thin gold hairline. */
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-crimson px-7 py-3
-      text-[15px] font-semibold text-white transition
-      hover:bg-crimson-dark focus:outline-none focus-visible:ring-2
-      focus-visible:ring-crimson/40 focus-visible:ring-offset-2
+    @apply inline-flex items-center justify-center gap-2 rounded-[2px] bg-crimson px-8 py-3.5
+      text-[12px] font-semibold uppercase tracking-[0.18em] text-cream
+      ring-1 ring-inset ring-gold/40 transition
+      hover:bg-crimson-dark hover:ring-gold/60
+      focus:outline-none focus-visible:ring-2 focus-visible:ring-gold
       disabled:cursor-not-allowed disabled:opacity-60;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center rounded-full border border-ink/15 bg-white
-      px-5 py-2.5 text-sm font-medium text-ink transition hover:border-ink/30 hover:bg-linen;
+    @apply inline-flex items-center justify-center rounded-[2px] border border-ink/25 bg-transparent
+      px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.16em] text-ink/75 transition
+      hover:border-crimson/50 hover:text-crimson;
   }
 
-  .section-eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.14em] text-crimson;
+  /* Drop cap for the opening of the About narrative. */
+  .dropcap::first-letter {
+    @apply float-left mr-2 mt-1 font-serif text-[3.4rem] font-semibold leading-[0.72] text-crimson;
+  }
+}
+
+/* ---- Custom cursor ---------------------------------------------------- */
+
+/* Hide the native cursor when ours is active, but keep a caret over fields. */
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none;
+}
+.has-custom-cursor input,
+.has-custom-cursor textarea,
+.has-custom-cursor [contenteditable="true"] {
+  cursor: text;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  border-radius: 9999px;
+  opacity: 0;
+  /* Centre on the pointer regardless of size, via CSS vars set from JS. */
+  transform: translate(
+    calc(var(--x, 0) * 1px - 50%),
+    calc(var(--y, 0) * 1px - 50%)
+  );
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: #c6aa73; /* gold-light */
+  transition:
+    opacity 0.25s ease,
+    width 0.18s ease,
+    height 0.18s ease;
+}
+
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(169, 138, 80, 0.75); /* gold */
+  background: rgba(169, 138, 80, 0);
+  transition:
+    opacity 0.3s ease,
+    width 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* Reveal only once the pointer has moved / is inside the document. */
+.cursor-ready .cursor-dot,
+.cursor-ready .cursor-ring {
+  opacity: 1;
+}
+
+/* Over interactive elements the ring swells and fills faintly; dot shrinks. */
+.cursor-hot .cursor-ring {
+  width: 54px;
+  height: 54px;
+  background: rgba(169, 138, 80, 0.1);
+  border-color: rgba(198, 170, 115, 0.9);
+}
+.cursor-hot .cursor-dot {
+  width: 4px;
+  height: 4px;
+}
+
+/* Press feedback. */
+.cursor-down .cursor-ring {
+  width: 26px;
+  height: 26px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-ring {
+    transition: opacity 0.3s ease;
   }
 }

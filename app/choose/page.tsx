@@ -3,7 +3,7 @@ import Link from "next/link";
 function Check() {
   return (
     <svg
-      className="mt-0.5 h-4 w-4 flex-none text-crimson"
+      className="mt-0.5 h-4 w-4 flex-none text-gold-dark"
       viewBox="0 0 16 16"
       fill="none"
       aria-hidden
@@ -11,7 +11,7 @@ function Check() {
       <path
         d="M3.5 8.5l3 3 6-7"
         stroke="currentColor"
-        strokeWidth="1.6"
+        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -37,10 +37,15 @@ function MethodCard({
   href: string;
 }) {
   return (
-    <div className="flex flex-1 flex-col rounded-2xl border border-ink/10 bg-white p-8 shadow-card transition hover:border-crimson/30">
+    <div className="relative flex flex-1 flex-col bg-ivory p-8 shadow-card ring-1 ring-ink/10 transition hover:ring-gold/50">
+      {/* Gold top rule */}
+      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gold/50" />
+
       <div className="flex items-baseline justify-between">
         <span className="section-eyebrow">{eyebrow}</span>
-        <span className="font-serif text-2xl font-medium text-ink">{price}</span>
+        <span className="font-serif text-2xl font-medium text-crimson">
+          {price}
+        </span>
       </div>
 
       <h2 className="mt-3 font-serif text-3xl font-semibold text-ink">{title}</h2>
@@ -67,55 +72,58 @@ function MethodCard({
 
 export default function ChoosePage() {
   return (
-    <main className="min-h-screen bg-linen px-6 py-16 sm:py-24">
+    <main className="min-h-screen bg-parchment px-6 py-16 sm:py-24">
       <div className="mx-auto max-w-4xl">
-        <div className="mb-12 text-center">
+        <div className="mb-14 text-center">
           <Link
             href="/"
             className="font-serif text-2xl font-semibold text-crimson"
           >
-            LarpedIn
+            LarpLink
           </Link>
           <h1 className="mt-6 font-serif text-4xl font-semibold text-ink sm:text-5xl">
             Choose your method
           </h1>
-          <p className="mx-auto mt-4 max-w-lg text-[15px] leading-relaxed text-ink/70">
-            Same destination, two speeds. Fast if you just want a sharp rewrite —
-            thorough if you want us to read your whole story first.
+          <div className="rule-gold mx-auto mt-6 w-full max-w-[220px]">
+            <span className="text-base leading-none">❖</span>
+          </div>
+          <p className="mx-auto mt-6 max-w-lg font-serif text-[17px] italic leading-relaxed text-ink/70">
+            One destination, two temperaments. Swift, if you seek a sharp
+            rewrite — thorough, if you would have us read your whole story first.
           </p>
         </div>
 
         <div className="flex flex-col gap-6 md:flex-row">
           <MethodCard
-            eyebrow="Larp-Lite — Free"
-            title="Fast"
+            eyebrow="Larp-Lite · Complimentary"
+            title="The Swift"
             price="Free"
-            description="Type in your details and get a clean, narrative rewrite in seconds. Great for a quick refresh."
+            description="Enter your details and receive a clean, narrative rewrite in moments. Ideal for a considered refresh."
             bullets={[
               "Type in your details",
-              "AI-generated rewrite",
+              "AI-composed rewrite",
               "Copy-paste ready output",
             ]}
-            cta="Start Free"
+            cta="Begin Freely"
             href="/lite"
           />
           <MethodCard
-            eyebrow="Larp-Max — $1"
-            title="Thorough"
+            eyebrow="Larp-Max · One Dollar"
+            title="The Thorough"
             price="$1"
-            description="Upload screenshots of your current profile for full context. Deeper analysis, more detailed, more tailored."
+            description="Provide screenshots of your current profile for full context. Deeper reading, richer detail, more tailored prose."
             bullets={[
               "Upload your profile screenshots",
-              "Deeper AI analysis",
-              "More polished, detailed rewrite",
+              "Deeper analysis",
+              "A more polished, detailed rewrite",
             ]}
             cta="Go Max"
             href="/max"
           />
         </div>
 
-        <p className="mt-10 text-center text-sm text-ink/50">
-          Not sure? Start with Lite — you can always go Max later.
+        <p className="mt-12 text-center font-serif text-sm italic text-ink/50">
+          Undecided? Begin with the Swift — the Thorough will keep.
         </p>
       </div>
     </main>

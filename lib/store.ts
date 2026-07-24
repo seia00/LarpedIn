@@ -5,7 +5,7 @@
 
 import type { GeneratedProfile, Tier } from "./types";
 
-const KEY = "larpedin:profile";
+const KEY = "larplink:profile";
 
 export interface StoredProfile {
   profile: GeneratedProfile;
