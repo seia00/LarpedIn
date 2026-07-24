@@ -40,7 +40,9 @@ export async function POST(req: Request) {
           { role: "user", content: buildUserPrompt(form) },
         ],
         response_format: { type: "json_object" },
-        temperature: 0.7,
+        // Bolder sampling for a more vivid, varied LARP; JSON mode keeps the
+        // structure intact regardless.
+        temperature: 0.9,
         max_tokens: 4000,
       }),
     });

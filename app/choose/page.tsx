@@ -27,6 +27,7 @@ function MethodCard({
   bullets,
   cta,
   href,
+  comingSoon = false,
 }: {
   eyebrow: string;
   title: string;
@@ -35,9 +36,14 @@ function MethodCard({
   bullets: string[];
   cta: string;
   href: string;
+  comingSoon?: boolean;
 }) {
   return (
-    <div className="relative flex flex-1 flex-col bg-ivory p-8 shadow-card ring-1 ring-ink/10 transition hover:ring-gold/50">
+    <div
+      className={`relative flex flex-1 flex-col bg-ivory p-8 shadow-card ring-1 ring-ink/10 transition ${
+        comingSoon ? "opacity-90" : "hover:ring-gold/50"
+      }`}
+    >
       {/* Gold top rule */}
       <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gold/50" />
 
@@ -55,7 +61,10 @@ function MethodCard({
 
       <ul className="mt-6 space-y-3">
         {bullets.map((b) => (
-          <li key={b} className="flex gap-3 text-[15px] text-ink/80">
+          <li
+            key={b}
+            className={`flex gap-3 text-[15px] ${comingSoon ? "text-ink/50" : "text-ink/80"}`}
+          >
             <Check />
             <span>{b}</span>
           </li>
@@ -63,9 +72,20 @@ function MethodCard({
       </ul>
 
       <div className="mt-8 flex-1" />
-      <Link href={href} className="btn-primary w-full">
-        {cta}
-      </Link>
+      {comingSoon ? (
+        <button
+          type="button"
+          disabled
+          aria-disabled="true"
+          className="w-full cursor-not-allowed rounded-[2px] border border-ink/20 bg-transparent px-8 py-3.5 text-[12px] font-semibold uppercase tracking-[0.18em] text-ink/45"
+        >
+          Coming Soon…
+        </button>
+      ) : (
+        <Link href={href} className="btn-primary w-full">
+          {cta}
+        </Link>
+      )}
     </div>
   );
 }
@@ -108,7 +128,7 @@ export default function ChoosePage() {
             href="/lite"
           />
           <MethodCard
-            eyebrow="Larp-Max · One Dollar"
+            eyebrow="Larp-Max · Coming Soon"
             title="The Thorough"
             price="$1"
             description="Provide screenshots of your current profile for full context. Deeper reading, richer detail, more tailored prose."
@@ -119,6 +139,7 @@ export default function ChoosePage() {
             ]}
             cta="Go Max"
             href="/max"
+            comingSoon
           />
         </div>
 

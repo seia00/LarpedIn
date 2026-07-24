@@ -47,7 +47,7 @@ export interface GeneratedProfile {
   name?: string;
   pronouns?: string;
   headline: string; // max 220 chars
-  about: string; // max 2600 chars
+  about: string; // max 800 chars — a single tight, high-impact paragraph
   experience: GeneratedExperience[];
   education: GeneratedEducation[];
   skills: string[];

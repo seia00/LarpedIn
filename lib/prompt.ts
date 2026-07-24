@@ -169,12 +169,29 @@ function safeStr(v: unknown): string {
   return String(v);
 }
 
+// Enforce a length limit without guillotining a word mid-way — a LARP that
+// ends "...recognized for driving outstanding res" is a bad look. Prefer to
+// end on a sentence boundary, otherwise the last whole word.
+function clampText(input: string, max: number): string {
+  const text = input.trim();
+  if (text.length <= max) return text;
+  const slice = text.slice(0, max);
+  const lastSentence = Math.max(
+    slice.lastIndexOf(". "),
+    slice.lastIndexOf("! "),
+    slice.lastIndexOf("? "),
+  );
+  if (lastSentence > max * 0.6) return slice.slice(0, lastSentence + 1).trim();
+  const lastSpace = slice.lastIndexOf(" ");
+  return (lastSpace > 0 ? slice.slice(0, lastSpace) : slice).trim();
+}
+
 export function normalizeProfile(p: Partial<GeneratedProfile>): GeneratedProfile {
   return {
     name: typeof p.name === "string" ? p.name : undefined,
     pronouns: typeof p.pronouns === "string" ? p.pronouns : undefined,
-    headline: safeStr(p.headline).slice(0, 220),
-    about: safeStr(p.about).slice(0, 800),
+    headline: clampText(safeStr(p.headline), 220),
+    about: clampText(safeStr(p.about), 800),
     experience: Array.isArray(p.experience)
       ? p.experience.map((e) => ({
           title: safeStr(e?.title),

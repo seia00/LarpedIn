@@ -59,9 +59,14 @@ export default function SuedeBackground() {
     let W = 0;
     let H = 0;
 
-    function resize() {
-      W = window.innerWidth;
-      H = window.innerHeight;
+    function resize(): boolean {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      // Bail if the viewport isn't measurable yet (0 would make rows compute to
+      // Infinity/NaN and crash createImageData). The loop retries until ready.
+      if (w < 1 || h < 1) return false;
+      W = w;
+      H = h;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas!.width = Math.floor(W * dpr);
       canvas!.height = Math.floor(H * dpr);
@@ -89,6 +94,7 @@ export default function SuedeBackground() {
         grain[i] = (Math.random() - 0.5) * 0.05; // permanent suede texture
       }
       img = octx!.createImageData(cols, rows);
+      return true;
     }
 
     resize();
@@ -220,20 +226,25 @@ export default function SuedeBackground() {
 
     let raf = 0;
     function loop() {
-      render();
+      if (!img) resize(); // keep retrying until the viewport is measurable
+      render(); // no-ops while img is still null
+      if (reduceMotion) {
+        if (img) {
+          raf = 0;
+          return; // one static drape, then stop
+        }
+      }
       raf = requestAnimationFrame(loop);
     }
 
     const onResize = () => resize();
     window.addEventListener("resize", onResize);
 
-    if (reduceMotion) {
-      render(); // one static drape, no interaction
-    } else {
+    if (!reduceMotion) {
       window.addEventListener("pointermove", onPointerMove, { passive: true });
       window.addEventListener("pointerleave", onPointerLeave, { passive: true });
-      raf = requestAnimationFrame(loop);
     }
+    raf = requestAnimationFrame(loop);
 
     return () => {
       cancelAnimationFrame(raf);

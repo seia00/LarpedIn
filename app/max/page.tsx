@@ -1,35 +1,41 @@
 import Link from "next/link";
-import ProfileForm from "@/components/ProfileForm";
 
-// NOTE: In production, gate this route behind a Stripe checkout / payment link
-// before granting access (see build spec step 9). For v1 the form is open so the
-// end-to-end flow can be exercised; add the payment check in middleware or a
-// server component wrapper here.
+// Larp-Max is gated until Stripe checkout is wired up (see build spec step 9).
+// Until then this route shows a coming-soon state rather than the form, so the
+// premium flow can't be used even via a direct URL. To re-enable: restore the
+// ProfileForm (tier="max") behind a payment check.
 export default function MaxPage() {
   return (
-    <main className="min-h-screen bg-parchment px-6 py-14 sm:py-20">
-      <div className="mx-auto max-w-2xl">
-        <header className="mb-12">
-          <Link
-            href="/"
-            className="font-serif text-xl font-semibold text-crimson"
-          >
-            LarpLink
-          </Link>
-          <div className="mt-6">
-            <span className="section-eyebrow">Larp-Max · $1</span>
-            <h1 className="mt-2 font-serif text-4xl font-semibold text-ink">
-              The full treatment
-            </h1>
-            <p className="mt-3 font-serif text-[17px] italic leading-relaxed text-ink/70">
-              Provide screenshots of your current profile so we may read your
-              whole story, then fill in the details below. Claude will draw out
-              what is there and render it richer.
-            </p>
-          </div>
-        </header>
+    <main className="flex min-h-screen flex-col items-center justify-center bg-parchment px-6 py-20 text-center">
+      <div className="mx-auto max-w-lg">
+        <Link href="/" className="font-serif text-xl font-semibold text-crimson">
+          LarpLink
+        </Link>
 
-        <ProfileForm tier="max" />
+        <div className="mt-10">
+          <span className="section-eyebrow">Larp-Max · $1</span>
+          <h1 className="mt-3 font-serif text-5xl font-semibold text-ink">
+            Coming soon
+          </h1>
+          <div className="rule-gold mx-auto mt-6 w-full max-w-[200px]">
+            <span className="text-base leading-none">❖</span>
+          </div>
+          <p className="mt-6 font-serif text-[17px] italic leading-relaxed text-ink/70">
+            The full treatment — screenshot upload, deeper analysis, a richer,
+            more tailored LARP — is nearly ready. We&apos;re putting the finishing
+            touches on checkout. In the meantime, the Swift is free and every bit
+            as bold.
+          </p>
+        </div>
+
+        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+          <Link href="/lite" className="btn-primary">
+            Try Larp-Lite Free
+          </Link>
+          <Link href="/choose" className="btn-ghost">
+            Back to methods
+          </Link>
+        </div>
       </div>
     </main>
   );
