@@ -4,7 +4,7 @@ export const OUTPUT_SCHEMA_DESCRIPTION = `{
   "name": "string, optional — the person's name if you can infer it, else omit",
   "pronouns": "string, optional — e.g. 'she/her', only if clearly stated",
   "headline": "string, max 220 chars — punchy, specific, quietly devastating",
-  "about": "string, max 2600 chars — first-person narrative dripping with understated prestige",
+  "about": "string, max 800 chars — a SINGLE tight paragraph, first-person, every single word chosen to hit like a freight train. No essays. Nobody reads essays. One paragraph that makes someone stop and think 'damn.'",
   "experience": [
     { "title": "string", "company": "string", "dates": "string", "location": "string", "description": "string — 3-5 tight achievement bullets, each one reads like a press release" }
   ],
@@ -88,12 +88,12 @@ The gray zone is VAST. You can describe the same fast-food job as either "worked
 
 === CRAFT: THE VOICE OF QUIET, CRUSHING COMPETENCE ===
 
-- Write the About in FIRST PERSON. Open with a magnetic hook that makes the reader lean in. The arc should feel like someone who is quietly, OBVIOUSLY a big deal — not trying too hard, but every sentence lands with weight.
+- Write the About in FIRST PERSON as a SINGLE paragraph — dense, tight, every sentence earning its place. No rambling. No multi-paragraph biographies that go unread. One paragraph that hits like a freight train. Cut every word that doesn't pull its weight. Density is power: a 200-word paragraph where every sentence lands a punch is infinitely better than 500 words of padded prestige. Think of it as the one answer you'd give when someone says "tell me about yourself" and you have 30 seconds to make them remember you.
 - Experience bullets: every single one should sound like a MAJOR win. Active voice. Sharp, vivid language. No bullet should feel like a job description — every bullet should feel like a highlight reel.
 - Burn "synergy," "passionate," "results-oriented," "team player," "wear many hats," "fast learner," "go-getter" — these are the opposite of impressive. They're conversation-fillers. Use PRECISE, VIVID, CONVICTION-HEAVY prose instead.
 - The About should read like the bio of someone who was invited to give a TED talk — not someone asking to be invited.
 - Headline: punchy, specific, no clichés. It should make someone stop scrolling. Max 220 characters — make every single one count.
-- About: max 2600 characters. Use every last one if the input justifies it.
+- About: max 800 characters — a single, devastating paragraph. Every word must justify its existence. If the output is longer than one tight paragraph, you have failed.
 - Skills: never bare keywords. "Figma" → "Design tooling & prototyping." "Python" → "Data engineering & automation." Frame them as capabilities, not laundry-list items.
 - Return ONLY valid JSON matching the schema. No markdown, no fences, no commentary.`;
 
@@ -174,7 +174,7 @@ export function normalizeProfile(p: Partial<GeneratedProfile>): GeneratedProfile
     name: typeof p.name === "string" ? p.name : undefined,
     pronouns: typeof p.pronouns === "string" ? p.pronouns : undefined,
     headline: safeStr(p.headline).slice(0, 220),
-    about: safeStr(p.about).slice(0, 2600),
+    about: safeStr(p.about).slice(0, 800),
     experience: Array.isArray(p.experience)
       ? p.experience.map((e) => ({
           title: safeStr(e?.title),
