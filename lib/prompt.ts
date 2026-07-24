@@ -163,27 +163,33 @@ export function parseModelJson(raw: string): GeneratedProfile {
   return normalizeProfile(parsed);
 }
 
+function safeStr(v: unknown): string {
+  if (typeof v === "string") return v;
+  if (v === null || v === undefined) return "";
+  return String(v);
+}
+
 export function normalizeProfile(p: Partial<GeneratedProfile>): GeneratedProfile {
   return {
     name: typeof p.name === "string" ? p.name : undefined,
     pronouns: typeof p.pronouns === "string" ? p.pronouns : undefined,
-    headline: (p.headline ?? "").toString().slice(0, 220),
-    about: (p.about ?? "").toString().slice(0, 2600),
+    headline: safeStr(p.headline).slice(0, 220),
+    about: safeStr(p.about).slice(0, 2600),
     experience: Array.isArray(p.experience)
       ? p.experience.map((e) => ({
-          title: e?.title ?? "",
-          company: e?.company ?? "",
-          dates: e?.dates ?? "",
-          location: e?.location ?? "",
-          description: e?.description ?? "",
+          title: safeStr(e?.title),
+          company: safeStr(e?.company),
+          dates: safeStr(e?.dates),
+          location: safeStr(e?.location),
+          description: safeStr(e?.description),
         }))
       : [],
     education: Array.isArray(p.education)
       ? p.education.map((e) => ({
-          school: e?.school ?? "",
-          degree: e?.degree ?? "",
-          dates: e?.dates ?? "",
-          activities: e?.activities ?? "",
+          school: safeStr(e?.school),
+          degree: safeStr(e?.degree),
+          dates: safeStr(e?.dates),
+          activities: safeStr(e?.activities),
         }))
       : [],
     skills: Array.isArray(p.skills) ? p.skills.filter(Boolean).map(String) : [],

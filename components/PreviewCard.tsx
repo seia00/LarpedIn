@@ -8,7 +8,9 @@ function Divider() {
 // Split a description into clean bullet lines. Accepts newline- or
 // bullet-delimited text and falls back to sentence-ish splitting.
 function toLines(description: string): string[] {
+  if (typeof description !== "string") return [];
   const trimmed = description.trim();
+  if (!trimmed) return [];
   if (!trimmed) return [];
   const byLine = trimmed
     .split(/\n+/)

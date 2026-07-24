@@ -22,7 +22,7 @@ export default function CopySection({
     }
   }
 
-  if (!text.trim()) return null;
+  if (typeof text !== "string" || !text.trim()) return null;
 
   return (
     <div className="rounded-[4px] bg-ivory ring-1 ring-ink/10">
