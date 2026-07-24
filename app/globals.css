@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: #ffffff;
+  color: #1a1a1a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Thin dividers instead of heavy borders — the design-system default. */
+@layer components {
+  .hairline {
+    @apply border-0 border-t border-ink/10;
+  }
+
+  /* Form field chrome (Inter). */
+  .field-label {
+    @apply block text-sm font-medium text-ink/70 mb-1.5;
+  }
+
+  .field-input {
+    @apply w-full rounded-md border border-ink/15 bg-white px-3.5 py-2.5 text-[15px] text-ink
+      placeholder:text-ink/35 outline-none transition
+      focus:border-crimson focus:ring-2 focus:ring-crimson/15;
+  }
+
+  .field-textarea {
+    @apply field-input min-h-[96px] resize-y leading-relaxed;
+  }
+
+  /* Primary CTA — crimson fill, generous padding, rounded. */
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-crimson px-7 py-3
+      text-[15px] font-semibold text-white transition
+      hover:bg-crimson-dark focus:outline-none focus-visible:ring-2
+      focus-visible:ring-crimson/40 focus-visible:ring-offset-2
+      disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-full border border-ink/15 bg-white
+      px-5 py-2.5 text-sm font-medium text-ink transition hover:border-ink/30 hover:bg-linen;
+  }
+
+  .section-eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.14em] text-crimson;
+  }
+}
