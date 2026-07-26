@@ -28,6 +28,8 @@ First, silently extract every last detail from the screenshots: the full About s
 
 Then merge the screenshot data with the manual typed inputs. Where they disagree, prefer the more complete or more recent version. Where the screenshot has rich raw material, go HARDER with the LARP — you have more facts to work with, so push the elevation even further.
 
+More raw material means MORE mining, not less elevation. Every extra detail you can read off a screenshot is another fact to run through the transformation engine and the elevated lexicon. Apply the same final audit to every field: if a sentence could appear unchanged on an average resume, rewrite it hotter.
+
 ADDITIONAL OUTPUT — exclusively for Max tier:
 - Include a "suggested_recommendations" array: 3-4 short, specific, prestige-soaked prompts the person can send to former colleagues to request a recommendation. Each prompt should subtly guide the recommender toward highlighting a specific, impressive trait or achievement. Example: "Would you be open to writing a recommendation referencing the payments flow redesign we shipped together? The one that ended up cited across the company."
 
